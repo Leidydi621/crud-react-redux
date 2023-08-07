@@ -1,10 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, type Middleware } from "@reduxjs/toolkit";
 import usersReducer from "./users/slice";
 
-const persistanceLocalStorageMiddleware = (store) => (next) => (action) => {
-	next(action);
-	localStorage.setItem("__redux__state__", JSON.stringify(store.getState())); //transformamos todo el store, el state a un string y lo guardamos
-};
+const persistanceLocalStorageMiddleware: Middleware =
+	(store) => (next) => (action) => {
+		next(action);
+		localStorage.setItem("__redux__state__", JSON.stringify(store.getState())); //transformamos todo el store, el state a un string y lo guardamos
+	};
 
 export const store = configureStore({
 	reducer: {
